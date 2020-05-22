@@ -1,2 +1,2 @@
-# stock_watch
+# Stock Watch
  
