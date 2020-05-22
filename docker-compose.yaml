@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  trader:
+    depends_on:
+      - api
+    build: .
+    restart: unless-stopped
+    container_name: robin_trader
+    volumes:
+      - /usr/src/app
+    networks:
+      - app-network
+  api:
+    build: ../ImpliedIVRankings/
+    restart: unless-stopped
+    container_name: iv_api
+    networks:
+      - app-network
+    ports:
+      - 5001:5001
+networks:
+  app-network:
+    driver: bridge

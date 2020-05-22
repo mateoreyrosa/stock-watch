@@ -1,0 +1,14 @@
+#!/bin/bash
+echo Prune images...
+echo "y" |  docker image prune -a
+echo Kill containers...
+docker kill $( docker ps -q)
+echo Remove containers...
+docker rm $( docker ps -a -q)
+echo "y" |  docker volume prune
+
+docker image rm robin_trader
+docker image rm iv_api
+
+echo Run docker compose...
+docker-compose up --build
