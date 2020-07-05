@@ -20,23 +20,23 @@ def get_current_time():
     return t, current, nytz
 
 
-def wait_for_market_open():
+def wait_for_market_open(logging):
     t, current, nytz = get_current_time()
     market_open = get_defined_time(9, 30, nytz)
 
     while current < market_open:
         sleep(10)
         t, current, nytz = get_current_time()
-        print(t)
+        logging.warning(f"{current} compared {market_open}")
 
 
-def run_until_close(symbols, c):
+def run_until_close(symbols, c, logging):
     t, current, nytz = get_current_time()
     market_close = get_defined_time(16, 30, nytz)
 
     while current < market_close:
         executor = ThreadPoolExecutor(10)
-        symbols = price.watch_prices(c, executor, symbols)
+        symbols = price.watch_prices(c, executor, symbols, logging)
         executor.shutdown(wait=False)
 
         sleep(20)

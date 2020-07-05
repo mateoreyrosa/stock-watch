@@ -7,6 +7,7 @@ def chunker(seq, size):
 
 
 def get_symbols(num):
+    print(num)
     url = (f'http://{os.environ["API_URL"]}'
            f"/symbols/{num}")
     try:

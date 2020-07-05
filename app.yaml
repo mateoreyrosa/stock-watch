@@ -1,0 +1,10 @@
+runtime: python37
+env: standard
+instance_class: B1
+handlers:
+  - url: .*
+    script: auto
+basic_scaling:
+  idle_timeout: 60s
+  max_instances: 20
+network: {}
